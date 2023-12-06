@@ -1,4 +1,6 @@
 import time
+import os
+
 from multiprocessing import Process
 
 from confluent_kafka import Producer
@@ -9,14 +11,14 @@ from confluent_kafka.schema_registry.avro import AvroSerializer
 from customer import Customer, CUSTOMER_SCHEMA
 from transaction import Transaction, TRANSACTION_SCHEMA
 
-BOOTSTRAP_SERVER = 'localhost:30756'
-SCHEMA_REGISTRY = 'http://localhost:8081'
-CUSTOMERS_TOPIC = 'customers'
-TRANSACTIONS_TOPIC = 'transactions'
+BOOTSTRAP_SERVER = os.environ.get('G_BOOTSTRAP_SERVER', 'localhost:30756')
+SCHEMA_REGISTRY = os.environ.get('G_SCHEMA_REGISTRY', 'http://localhost:8081')
+CUSTOMERS_TOPIC = os.environ.get('G_CUSTOMERS_TOPIC', 'customers')
+TRANSACTIONS_TOPIC = os.environ.get('G_TRANSACTIONS_TOPIC', 'transactions')
 
-CUSTOMERS_PER_SECOND = 1
-TRANSACTIONS_PER_SECOND = 1000
-TRANSACTIONS_PROCESSES = 20
+CUSTOMERS_PER_SECOND = int(os.environ.get('G_CUSTOMERS_PER_SECOND', 1))
+TRANSACTIONS_PER_SECOND = int(os.environ.get('G_TRANSACTIONS_PER_SECOND', 1000))
+TRANSACTIONS_PROCESSES = int(os.environ.get('G_TRANSACTIONS_PROCESSES', 20))
 
 KAFKA_CONF = {
     'bootstrap.servers': BOOTSTRAP_SERVER
