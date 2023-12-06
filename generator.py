@@ -16,8 +16,8 @@ SCHEMA_REGISTRY = os.environ.get('G_SCHEMA_REGISTRY', 'http://localhost:8081')
 CUSTOMERS_TOPIC = os.environ.get('G_CUSTOMERS_TOPIC', 'customers')
 TRANSACTIONS_TOPIC = os.environ.get('G_TRANSACTIONS_TOPIC', 'transactions')
 
-CUSTOMERS_PER_SECOND = int(os.environ.get('G_CUSTOMERS_PER_SECOND', 1))
-TRANSACTIONS_PER_SECOND = int(os.environ.get('G_TRANSACTIONS_PER_SECOND', 1000))
+CUSTOMERS_PER_SECOND = float(os.environ.get('G_CUSTOMERS_PER_SECOND', 1))
+TRANSACTIONS_PER_SECOND = float(os.environ.get('G_TRANSACTIONS_PER_SECOND', 1000))
 TRANSACTIONS_PROCESSES = int(os.environ.get('G_TRANSACTIONS_PROCESSES', 20))
 
 KAFKA_CONF = {
