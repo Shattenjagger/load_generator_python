@@ -9,7 +9,7 @@ CUSTOMER_SCHEMA = """
     "fields": [
         {
             "name": "id",
-            "type": "string"
+            "type": "long"
         },
         {
             "name": "name",
@@ -41,8 +41,8 @@ CUSTOMER_SCHEMA = """
 
 
 class Customer(object):
-    def __init__(self, name, country, birth_date, favorite_number, city, address, phone_number):
-        self.id = str(uuid.uuid4().hex)
+    def __init__(self, user_id, name, country, birth_date, favorite_number, city, address, phone_number):
+        self.id = user_id
         self.name = name
         self.country = country
         self.birth_date = str(birth_date)
@@ -62,5 +62,6 @@ class Customer(object):
     @classmethod
     def get_fake(cls):
         fake = Faker()
-        return Customer(fake.name(), fake.country(), fake.date(), fake.random.randint(0, 100),
+        return Customer(fake.random.randint(0, 1000), fake.name(), fake.country(), fake.date(),
+                        fake.random.randint(0, 100),
                         fake.city(), fake.address(), fake.phone_number())
