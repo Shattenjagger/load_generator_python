@@ -1,7 +1,11 @@
+import uuid
+
 from faker import Faker
+
 
 class Customer(object):
     def __init__(self, name, country, birth_date, city, address, phone_number):
+        self.id = str(uuid.uuid4().hex)
         self.name = name
         self.country = country
         self.birth_date = birth_date
@@ -10,14 +14,15 @@ class Customer(object):
         self.phone_number = phone_number
 
     def __str__(self):
-        return f'Customer: {self.name}, {self.country}, {self.birth_date}, {self.city}, {self.address}, {self.phone_number}'
+        return (f'Customer: {self.id}, {self.name}, {self.country}, {self.birth_date}, {self.city}, '
+                f'{self.address}, {self.phone_number}')
 
     def __repr__(self):
         return self.__str__()
 
+
 fake = Faker()
 
 customer = Customer(fake.name(), fake.country(), fake.date(), fake.city(), fake.address(), fake.phone_number())
-
 
 print(customer)
